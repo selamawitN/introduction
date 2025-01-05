@@ -1,13 +1,16 @@
 ```mermaid
+ 
+
 flowchart TD
     A((Start)) --> B[/Input number of students/]
     B -->|Valid| C[Collect student data]
+    B -->|Invalid| AE((End))  
     C --> D[/Input student name/]
     D -->|Valid| E[/Input student ID/]
     E -->|Valid| F[/Input daily study hours/]
     F --> G[Calculate total study hours]
     G --> H[Calculate daily averages]
-    H --> I[/Display menu/]
+    H --> I[Display menu]
     
     I --> J[Add Student]
     I --> K[Delete Student]
@@ -19,23 +22,29 @@ flowchart TD
 
     J --> C
     K --> Q[/Enter ID to delete/]
-    Q -->|Found| R[Delete student]
-    R --> I
-    Q -->|Not Found| I
+    Q --> R{Is ID found?}
+    R -->|Yes| S[/Delete student/]
+    S --> I
+    R -->|No| T[/Student not found/]
+    T --> Q  
 
-    L --> S[/Enter ID to edit/]
-    S -->|Found| T[Edit student details]
-    T --> I
-    S -->|Not Found| I
-
-    M --> U[/Search for student/]
-    U -->|Found| V[/Display student details/]
-    U -->|Not Found| I
-
-    N --> W[/Display all records/]
+    L --> U[/Enter ID to edit/]
+    U --> V{Is ID found?}
+    V -->|Yes| W[/Edit student details/]
     W --> I
+    V -->|No| X[/Student not found/]
+    X --> U  
 
-    O --> X[/Sort by Name or ID/]
-    X --> I
+    M --> Y[/Search for student/]
+    Y --> Z{Is ID found?}
+    Z -->|Yes| AA[/Display student details/]
+    Z -->|No| AB[/Student not found/]
+    AB --> Y  
 
-    P --> Z((End))
+    N --> AC[/Display all records/]
+    AC --> I
+
+    O --> AD[/Sort by Name or ID/]
+    AD --> I
+
+    P --> AE((End))
